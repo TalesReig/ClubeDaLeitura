@@ -54,17 +54,17 @@ namespace ClubeDaLeitura.ConsoleApp
         }
         public static void TodosOsEmprestimos(Emprestimo[] emprestimos, Cliente[] amigos, Revista[] revistas)
         {
-            Console.WriteLine(" _____________________________________________________");
-            Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", " ID ", " NOME DO AMIGO ", "NOME DA REVISTA", "   DEVOLUÇÃO  ");
-            Console.WriteLine("|_____|_______________|_______________|_______________|");
+            Console.WriteLine(" _____________________________________________________________________");
+            Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|{4,-15}|", " ID ", " NOME DO AMIGO ", "NOME DA REVISTA", "   DEVOLUÇÃO  ","   EM ABERTO  ");
+            Console.WriteLine("|_____|_______________|_______________|_______________|_______________|");
             for (int i = 0; i < emprestimos.Length; i++)
             {
                 if (emprestimos[i] != null)
                 {
-                    Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", i, amigos[emprestimos[i].idDoAmigo].nome, revistas[emprestimos[i].idDaRevista].Nome, emprestimos[i].dataDeDevolucao);
+                    Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|{4,-15}|", i, amigos[emprestimos[i].idDoAmigo].nome, revistas[emprestimos[i].idDaRevista].Nome, emprestimos[i].dataDeDevolucao, emprestimos[i].emAberto);
                 }
             }
-            Console.WriteLine("|_____|_______________|_______________|_______________|");
+            Console.WriteLine("|_____|_______________|_______________|_______________|_______________|");
             Console.ReadKey();
         }
         public static void Excluir(Emprestimo[] emprestimos, Cliente[] amigos, Revista[] revistas)
