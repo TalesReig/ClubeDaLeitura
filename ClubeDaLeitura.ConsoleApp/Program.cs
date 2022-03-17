@@ -50,6 +50,9 @@ namespace ClubeDaLeitura.ConsoleApp
             emprestimoTeste.idDoAmigo = 0;
             emprestimoTeste.dataDoEmprestimo = DateTime.Today;
             emprestimoTeste.dataDeDevolucao = DateTime.Today.AddDays(5);
+            emprestimoTeste.emAberto = true;
+            Revista.DeixarRevistaIndisponivel(0, revistas);
+            Cliente.DeixarClienteIndisponivel(0, amigos);
             for (int i = 0; i < emprestimos.Length; i++)
             {
                 if (emprestimos[i] == null || emprestimos[i] == default)
@@ -66,6 +69,7 @@ namespace ClubeDaLeitura.ConsoleApp
             amigoTeste.nomeDoResponsavel = "Pedro";
             amigoTeste.telefone = "9999-9999";
             amigoTeste.endereco = "Lages-SC";
+            amigoTeste.possuiEmprestimoEmAberto = true;
             for (int i = 0; i < amigos.Length; i++)
             {
                 if (amigos[i] == null || amigos[i] == default)
