@@ -8,6 +8,7 @@ namespace ClubeDaLeitura.ConsoleApp
         public string nomeDoResponsavel;
         public string telefone;
         public string endereco;
+        public bool possuiEmprestimoEmAberto;
 
         public void Cadastrar(Cliente[] amigos, Cliente newAmigo)
         {
@@ -19,6 +20,7 @@ namespace ClubeDaLeitura.ConsoleApp
             newAmigo.telefone = Console.ReadLine();
             Console.Write("O Endereço: ");
             newAmigo.endereco = Console.ReadLine();
+            newAmigo.possuiEmprestimoEmAberto = false;
 
             for (int i = 0; i < amigos.Length; i++)
             {
@@ -65,6 +67,16 @@ namespace ClubeDaLeitura.ConsoleApp
             int id = Convert.ToInt32(Console.ReadLine());
 
             amigos[id] = null;
+        }
+
+        public static void DeixarClienteIndisponivel(int idDoAmigo, Cliente[] amigos)
+        {
+            amigos[idDoAmigo].possuiEmprestimoEmAberto = true;
+        }
+
+        public static void DeixarClienteDisponivel(int idDoAmigo, Cliente[] amigos)
+        {
+            amigos[idDoAmigo].possuiEmprestimoEmAberto = false;
         }
     }
 }

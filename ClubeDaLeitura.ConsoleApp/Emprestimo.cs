@@ -10,18 +10,22 @@ namespace ClubeDaLeitura.ConsoleApp
         public DateTime dataDoEmprestimo;
         public DateTime dataDeDevolucao;
 
-        public void Cadastrar(Emprestimo[] emprestimos, Emprestimo newEmprestimo, Cliente[] amigos, Revista[] revistas)
+        public void Cadastrar(Revista[] revistasEmprestadas, Emprestimo[] emprestimos, Emprestimo newEmprestimo, Cliente[] amigos, Revista[] revistas)
         {
             Cliente.Lista(amigos);
-            Console.WriteLine("Digite o id do amigo que deseja pegar um livro: ");
-            newEmprestimo.idDoAmigo = Convert.ToInt32(Console.ReadLine());
+            VerificaSeOAmigoPossuiEmprestimosEmAberto(newEmprestimo, amigos);
+            Cliente.DeixarClienteIndisponivel(idDoAmigo, amigos);
+
             Revista.Listar(revistas);
-            Console.WriteLine("Digite o id da revista q esse amigo deseja pegar:");
-            newEmprestimo.idDaRevista = Convert.ToInt32(Console.ReadLine());
+            VerificaSeARevistaEstaDisponivel(newEmprestimo, revistas);
+            Revista.DeixarRevistaIndisponivel(idDaRevista, revistas);
+
             newEmprestimo.emAberto = true;
             newEmprestimo.dataDoEmprestimo = DateTime.Today;
             Console.WriteLine("A sua data de devolução do livro é: " + (DateTime.Today.AddDays(7)));
             newEmprestimo.dataDeDevolucao = DateTime.Today.AddDays(7);
+
+            Revista.DeixarRevistaIndisponivel(idDaRevista, revistas);
 
             for (int i = 0; i < emprestimos.Length; i++)
             {
@@ -71,11 +75,36 @@ namespace ClubeDaLeitura.ConsoleApp
 
             emprestimos[id] = null;
         }
-        //metodos extra
-        public static void Encerrar(Emprestimo[] emprestimos)
+        public static void Devolver(Revista[] revistasEmprestadas, Emprestimo[] emprestimos, Cliente[] amigos, Revista[] revistas)
         {
+            Emprestimo.TodosOsEmprestimos(emprestimos, amigos, revistas);
+            int id;
+            do
+            {
+                Console.WriteLine("Digite o Id do Emprestimo a ser encerrado: ");
+                id = Convert.ToInt32(Console.ReadLine());
+            } while (emprestimos[id].emAberto == false);
+            Cliente.DeixarClienteDisponivel(emprestimos[id].idDoAmigo, amigos);
+            Revista.DeixarRevistaDisponivel(emprestimos[id].idDaRevista, revistas);
+            emprestimos[id].emAberto = false;
 
         }
         //Metodos complementares
+        private void VerificaSeARevistaEstaDisponivel(Emprestimo newEmprestimo, Revista[] revistas)
+        {
+            do
+            {
+                Console.WriteLine("Digite o id da revista disponível q esse amigo deseja pegar:");
+                newEmprestimo.idDaRevista = Convert.ToInt32(Console.ReadLine());
+            } while (revistas[idDaRevista].disponivel == false);
+        }
+        private void VerificaSeOAmigoPossuiEmprestimosEmAberto(Emprestimo newEmprestimo, Cliente[] amigos)
+        {
+            do
+            {
+                Console.WriteLine("Digite o id do amigo que deseja pegar um livro: ");
+                newEmprestimo.idDoAmigo = Convert.ToInt32(Console.ReadLine());
+            } while (amigos[idDoAmigo].possuiEmprestimoEmAberto == true);
+        }
     }
 }

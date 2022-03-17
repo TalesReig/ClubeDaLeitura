@@ -8,6 +8,7 @@ namespace ClubeDaLeitura.ConsoleApp
         static Caixa[] caixas = new Caixa[10];
         static Cliente[] amigos = new Cliente[1000];
         static Revista[] revistas = new Revista[1000];
+        static Revista[] revistasEmprestadas = new Revista[1000];
         static Emprestimo[] emprestimos = new Emprestimo[1000];
         static int resposta;
         static void Main(string[] args)
@@ -127,7 +128,7 @@ namespace ClubeDaLeitura.ConsoleApp
             {
                 case 1:
                     Emprestimo newEmprestimo = new Emprestimo();
-                    newEmprestimo.Cadastrar( emprestimos, newEmprestimo,amigos,revistas);
+                    newEmprestimo.Cadastrar(revistasEmprestadas, emprestimos, newEmprestimo, amigos, revistas);
                     break;
                 case 2:
                     Emprestimo.Editar(emprestimos, amigos, revistas);
@@ -138,18 +139,21 @@ namespace ClubeDaLeitura.ConsoleApp
                 case 4:
                     Emprestimo.Excluir(emprestimos, amigos, revistas);
                     break;
+                case 5:
+                   Emprestimo.Devolver(revistasEmprestadas, emprestimos, amigos, revistas);
+                    break;
             }
             Console.Clear();
         }
         private static void MostrarMenuEmprestimos()
         {
-            Console.WriteLine(" ________________________________________________________________");
-            Console.WriteLine("|                                                                |");
-            Console.WriteLine("|                       Menu De Emprestimos                      |");
-            Console.WriteLine("|________________________________________________________________|");
-            Console.WriteLine("|                                                                |");
-            Console.WriteLine("| [1]Cadastrar | [2]Editar | [3]Listar | [4]Excluir |[5] Voltar  |");
-            Console.WriteLine("|________________________________________________________________|");
+            Console.WriteLine(" _____________________________________________________________________________");
+            Console.WriteLine("|                                                                             |");
+            Console.WriteLine("|                               Menu De Emprestimos                           |");
+            Console.WriteLine("|_____________________________________________________________________________|");
+            Console.WriteLine("|                                                                             |");
+            Console.WriteLine("| [1]Cadastrar | [2]Editar | [3]Listar | [4]Excluir |[6] Devolver |[5] Voltar |");
+            Console.WriteLine("|_____________________________________________________________________________|");
             Console.Write("\n Resposta: ");
         }
         private static void MenuDeRevistas()
@@ -161,7 +165,7 @@ namespace ClubeDaLeitura.ConsoleApp
             {
                 case 1:
                     Revista newRevista = new Revista();
-                    newRevista.Cadastrar(revistas, newRevista,caixas);
+                    newRevista.Cadastrar(revistas, revistasEmprestadas, newRevista,caixas);
                     break;
                 case 2:
                     Revista.Editar(revistas);
@@ -172,6 +176,7 @@ namespace ClubeDaLeitura.ConsoleApp
                 case 4:
                     Revista.Excluir(revistas);
                     break;
+                    
             }
             Console.Clear();
         }

@@ -74,10 +74,17 @@ namespace ClubeDaLeitura.ConsoleApp
             Console.ReadKey();
         }
 
-        public static void AdicionarRevistaNaCaixa(int idDaCaixa, Revista revista)
+        public static void AdicionarRevistaNaCaixa(Caixa[] caixas,Revista[] revistasEmprestadas, int idDaCaixa, Revista revista)
         {
-            //for e if, até achar um vazio
-            //caixas[idDaCaixa].revistasNaCaixa[i] = revista;
+            for(int i = 0; i < caixas[idDaCaixa].revistasNaCaixa.Length; i++)
+            {
+                if(caixas[idDaCaixa].revistasNaCaixa[i] == null)
+                {
+                    caixas[idDaCaixa].revistasNaCaixa[i] = revista;
+                    break;
+                }
+            }
         }
+
     }
 }

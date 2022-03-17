@@ -6,10 +6,11 @@ namespace ClubeDaLeitura.ConsoleApp
     {
         public int idDaCaixa;
         public int numeroEdicao;
+        public bool disponivel;
         public string Nome;
         public DateTime anoDeFabricacao;
 
-        public void Cadastrar(Revista[] revistas, Revista newRevista, Caixa[] caixas)
+        public void Cadastrar(Revista[] revistas, Revista[] revistasEmprestadas, Revista newRevista, Caixa[] caixas)
         {
             Caixa.Listar(caixas);
             Console.Write("O ID da caixa em q a revista se encontra: ");
@@ -20,8 +21,9 @@ namespace ClubeDaLeitura.ConsoleApp
             newRevista.numeroEdicao = Convert.ToInt32(Console.ReadLine());
             Console.Write("A Data de Fabricação: ");
             newRevista.anoDeFabricacao = Convert.ToDateTime(Console.ReadLine());
+            newRevista.disponivel = true;
 
-            AdcionarNaCaixa(idDaCaixa, newRevista);
+            Caixa.AdicionarRevistaNaCaixa(caixas, revistasEmprestadas, idDaCaixa, newRevista);
 
             for (int i = 0; i < revistas.Length; i++)
             {
@@ -63,25 +65,28 @@ namespace ClubeDaLeitura.ConsoleApp
         }
 
         //Metodos extras
-        public void AdcionarNaCaixa(int idDaCaixa, Revista revista)
+        public static void DeixarRevistaIndisponivel(int idDaRevista,Revista[] revistas)
         {
-            Caixa.AdicionarRevistaNaCaixa(idDaCaixa, revista);
+            revistas[idDaRevista].disponivel = false;
+        }
+        public static void DeixarRevistaDisponivel(int idDaRevista, Revista[] revistas)
+        {
+            revistas[idDaRevista].disponivel = true;
         }
         //métodos complementares
         private static void MostrarRevistas(Revista[] revistas)
         {
-            Console.WriteLine(" _____________________________________________________");
-            Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", " ID ", "    NOME   ", "    N° EDICAO   ", "   FABRICAÇÃO  ");
-            Console.WriteLine("|_____|_______________|_______________|_______________|");
+            Console.WriteLine(" _____________________________________________________________________");
+            Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|{4,-15}|", " ID ", "    NOME   ", "    N° EDICAO   ", "   FABRICAÇÃO  ","  DISPONIVEL  ");
+            Console.WriteLine("|_____|_______________|_______________|_______________|_______________|");
             for (int i = 0; i < revistas.Length; i++)
             {
                 if (revistas[i] != null)
                 {
-                    Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", i, revistas[i].Nome, revistas[i].numeroEdicao, revistas[i].anoDeFabricacao);
+                    Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", i, revistas[i].Nome, revistas[i].numeroEdicao, revistas[i].anoDeFabricacao, revistas[i].disponivel);
                 }
             }
-            Console.WriteLine("|_____|_______________|_______________|_______________|");
+            Console.WriteLine("|_____|_______________|_______________|_______________|_______________|");
         }
-
     }
 }
