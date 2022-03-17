@@ -27,19 +27,23 @@ namespace ClubeDaLeitura.ConsoleApp
                 {
                     case 1:
                         MenuDeEmprestimos();
+                        resposta = -1;
                         break;
                     case 2:
                         MenuDeRevistas();
+                        resposta = -1;
                         break;
                     case 3:
                         MenuDeAmigos();
+                        resposta = -1;
                         break;
                     case 4:
                         MenuDeCaixas();
+                        resposta = -1;
                         break;
                 }
                 Console.Clear();
-            } while (resposta != 5);
+            } while (resposta == -1);
 
         }
 
@@ -132,7 +136,7 @@ namespace ClubeDaLeitura.ConsoleApp
             {
                 case 1:
                     Emprestimo newEmprestimo = new Emprestimo();
-                    newEmprestimo.Cadastrar(revistasEmprestadas, emprestimos, newEmprestimo, amigos, revistas);
+                    newEmprestimo.Cadastrar( emprestimos, newEmprestimo, amigos, revistas);
                     break;
                 case 2:
                     Emprestimo.Editar(emprestimos, amigos, revistas);
@@ -156,7 +160,7 @@ namespace ClubeDaLeitura.ConsoleApp
             Console.WriteLine("|                               Menu De Emprestimos                           |");
             Console.WriteLine("|_____________________________________________________________________________|");
             Console.WriteLine("|                                                                             |");
-            Console.WriteLine("| [1]Cadastrar | [2]Editar | [3]Listar | [4]Excluir |[6] Devolver |[5] Voltar |");
+            Console.WriteLine("| [1]Cadastrar | [2]Editar | [3]Listar | [4]Excluir |[5] Devolver |[6] Voltar |");
             Console.WriteLine("|_____________________________________________________________________________|");
             Console.Write("\n Resposta: ");
         }

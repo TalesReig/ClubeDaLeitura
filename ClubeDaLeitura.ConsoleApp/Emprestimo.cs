@@ -10,7 +10,7 @@ namespace ClubeDaLeitura.ConsoleApp
         public DateTime dataDoEmprestimo;
         public DateTime dataDeDevolucao;
 
-        public void Cadastrar(Revista[] revistasEmprestadas, Emprestimo[] emprestimos, Emprestimo newEmprestimo, Cliente[] amigos, Revista[] revistas)
+        public void Cadastrar(Emprestimo[] emprestimos, Emprestimo newEmprestimo, Cliente[] amigos, Revista[] revistas)
         {
             Cliente.Lista(amigos);
             VerificaSeOAmigoPossuiEmprestimosEmAberto(newEmprestimo, amigos);
@@ -78,16 +78,20 @@ namespace ClubeDaLeitura.ConsoleApp
         public static void Devolver(Revista[] revistasEmprestadas, Emprestimo[] emprestimos, Cliente[] amigos, Revista[] revistas)
         {
             Emprestimo.TodosOsEmprestimos(emprestimos, amigos, revistas);
-            int id;
+            int id=0;
             do
             {
                 Console.WriteLine("Digite o Id do Emprestimo a ser encerrado: ");
                 id = Convert.ToInt32(Console.ReadLine());
             } while (emprestimos[id].emAberto == false);
-            Cliente.DeixarClienteDisponivel(emprestimos[id].idDoAmigo, amigos);
+
+            Cliente.DeixarClienteDisponivel(emprestimos[id].idDoAmigo, amigos); 
+            
             Revista.DeixarRevistaDisponivel(emprestimos[id].idDaRevista, revistas);
+
             emprestimos[id].emAberto = false;
 
+            Console.WriteLine("Livro devolvido com sucesso.");
         }
         //Metodos complementares
         private void VerificaSeARevistaEstaDisponivel(Emprestimo newEmprestimo, Revista[] revistas)

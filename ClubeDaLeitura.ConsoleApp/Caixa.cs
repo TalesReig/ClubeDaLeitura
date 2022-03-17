@@ -22,7 +22,7 @@ namespace ClubeDaLeitura.ConsoleApp
             {
                 if (caixas[i] == null || caixas[i] == default)
                 {
-                    caixas[i] = newCaixa;
+                    caixas[i] = newCaixa; 
                     break;
                 }
             }
@@ -59,7 +59,6 @@ namespace ClubeDaLeitura.ConsoleApp
         //Metodos complementares
         private static void MostrarCaixas(Caixa[] caixas)
         {
-            int id = 0;
             Console.WriteLine(" _____________________________________________________");
             Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", " ID ", "    COR   ", "  NUMERO  ", " ETIQUETA ");
             Console.WriteLine("|_____|_______________|_______________|_______________|");
@@ -67,13 +66,12 @@ namespace ClubeDaLeitura.ConsoleApp
             {
                 if (caixas[i] != null)
                 {
-                    Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", id++, caixas[i].cor, caixas[i].etiqueta, caixas[i].numero);
+                    Console.WriteLine("|{0,-5}|{1,-15}|{2,-15}|{3,-15}|", i, caixas[i].cor, caixas[i].etiqueta, caixas[i].numero);
                 }
             }
             Console.WriteLine("|_____|_______________|_______________|_______________|");
             Console.ReadKey();
         }
-
         public static void AdicionarRevistaNaCaixa(Caixa[] caixas,Revista[] revistasEmprestadas, int idDaCaixa, Revista revista)
         {
             for(int i = 0; i < caixas[idDaCaixa].revistasNaCaixa.Length; i++)
