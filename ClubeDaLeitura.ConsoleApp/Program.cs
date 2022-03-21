@@ -9,10 +9,12 @@ namespace ClubeDaLeitura.ConsoleApp
         static Cliente[] amigos = new Cliente[1000];
         static Revista[] revistas = new Revista[1000];
         static Revista[] revistasEmprestadas = new Revista[1000];
+        static Reserva[] reservas = new Reserva[1000];
         static Emprestimo[] emprestimos = new Emprestimo[1000];
         static int resposta;
         static void Main(string[] args)
         {
+
             ContrutorDeCaixaParaTeste();
             ContrutorDeAmigoParaTeste();
             ContrutorDeRevistaParaTeste();
@@ -39,6 +41,14 @@ namespace ClubeDaLeitura.ConsoleApp
                         break;
                     case 4:
                         MenuDeCaixas();
+                        resposta = -1;
+                        break;
+                    case 5:
+                        //MenuDeCategorias();
+                        resposta = -1;
+                        break;
+                    case 6:
+                        //MenuDeReservas();
                         resposta = -1;
                         break;
                 }
@@ -118,13 +128,13 @@ namespace ClubeDaLeitura.ConsoleApp
         //revista caixa - revista amigo - amigo imprestimo
         private static void MostrarMenuPrincipal()
         {
-            Console.WriteLine(" _________________________________________________________________");
-            Console.WriteLine("|                                                                 |");
-            Console.WriteLine("|                            Menu Principal                       |");
-            Console.WriteLine("|_________________________________________________________________|");
-            Console.WriteLine("|                                                                 |");
-            Console.WriteLine("| [1]Emprestimos | [2]Resvistas | [3]Amigos | [4]Caixa  |[5] Sair |");
-            Console.WriteLine("|_________________________________________________________________|");
+            Console.WriteLine(" ____________________________________________________________________________________________");
+            Console.WriteLine("|                                                                                            |");
+            Console.WriteLine("|                                           Menu Principal                                   |");
+            Console.WriteLine("|____________________________________________________________________________________________|");
+            Console.WriteLine("|                                                                                            |");
+            Console.WriteLine("| [1]Emprestimos | [2]Resvistas | [3]Amigos | [4]Caixa  |[5] Categoria |[6] Reserva|[7] Sair |");
+            Console.WriteLine("|____________________________________________________________________________________________|");
             Console.Write("\n Resposta: ");
         }
         private static void MenuDeEmprestimos()
@@ -264,6 +274,32 @@ namespace ClubeDaLeitura.ConsoleApp
             Console.WriteLine("| [1]Cadastrar | [2]Editar | [3]Listar | [4]Excluir |[5] Voltar  |");
             Console.WriteLine("|________________________________________________________________|");
             Console.Write("\n Resposta: ");
+        }
+
+        private static void MenuReservas()
+        {
+            //MostrarMenuReservas();
+            resposta = Convert.ToInt32(Console.ReadLine());
+            switch (resposta)
+            {
+                case 1:
+                    Reserva newReserva = new Reserva();
+                    newReserva.Cadastrar(reservas, newReserva,amigos,revistas);
+                    break;
+                case 2:
+                    Reserva.Editar(reservas,amigos, revistas);
+                    break;
+                case 3:
+                    Reserva.Listar(reservas, amigos, revistas);
+                    break;
+                case 4:
+                    Reserva.Excluir(reservas, amigos, revistas);
+                    break;
+                case 5:
+                    //Reserva.Emprestar(reservas, amigos, revistas);
+                    break;
+            }
+            Console.Clear();
         }
     }
 }

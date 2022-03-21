@@ -9,6 +9,7 @@ namespace ClubeDaLeitura.ConsoleApp
         public bool disponivel;
         public string Nome;
         public DateTime anoDeFabricacao;
+        public int DiasParaEmprestimo;
 
         public void Cadastrar(Revista[] revistas, Revista[] revistasEmprestadas, Revista newRevista, Caixa[] caixas)
         {
@@ -24,6 +25,9 @@ namespace ClubeDaLeitura.ConsoleApp
             newRevista.disponivel = true;
 
             Caixa.AdicionarRevistaNaCaixa(caixas, revistasEmprestadas, idDaCaixa, newRevista);
+            //mostrar categorias disponiveis
+            //salvar o  id da categoria q a revista pertence;
+            //newRevista.DiasParaEmprestimo = categorias[id].dias
 
             for (int i = 0; i < revistas.Length; i++)
             {

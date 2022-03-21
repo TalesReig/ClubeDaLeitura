@@ -24,8 +24,7 @@ namespace ClubeDaLeitura.ConsoleApp
             newEmprestimo.dataDoEmprestimo = DateTime.Today;
             Console.WriteLine("A sua data de devolução do livro é: " + (DateTime.Today.AddDays(7)));
             newEmprestimo.dataDeDevolucao = DateTime.Today.AddDays(7);
-
-            Revista.DeixarRevistaIndisponivel(idDaRevista, revistas);
+            //newEmprestimo.dataDeDevolucao = DateTime.Today.AddDays(revistas[id].DiasDeEmprestimo);
 
             for (int i = 0; i < emprestimos.Length; i++)
             {
